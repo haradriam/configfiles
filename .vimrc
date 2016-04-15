@@ -22,6 +22,9 @@ filetype indent plugin on
  
 " Enable syntax highlighting
 syntax on
+
+" Enable folding
+set fdm=indent
  
  
 "------------------------------------------------------------
@@ -110,7 +113,8 @@ set visualbell
 set t_vb=
  
 " Enable use of the mouse for all modes
-"set mouse=a
+set mouse=a
+set ttymouse=xterm2
  
 " Set the command window height to 2 lines, to avoid many cases of having to
 " "press <Enter> to continue"
@@ -118,7 +122,7 @@ set cmdheight=2
  
 " Display line numbers on the left
 set number
- 
+
 " Quickly time out on keycodes, but never time out on mappings
 set notimeout ttimeout ttimeoutlen=200
  
@@ -155,3 +159,5 @@ map Y y$
 " Map <C-L> (redraw screen) to also turn off search highlighting until the
 " next search
 nnoremap <C-L> :nohl<CR><C-L>
+
+colorscheme koehler
