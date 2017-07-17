@@ -105,7 +105,7 @@ imap <F6> <ESC><C-t>
 
 " --------------------------------- Pluggins ----------------------------------
 call plug#begin('~/.vim/plugged')
-" Easy allinhment
+" Easy allingment
 Plug 'godlygeek/tabular'
 
 " Enhanced status lines
@@ -124,6 +124,17 @@ Plug 'haradriam/hl_limits'
 " Auto reload tags file
 Plug 'craigemery/vim-autotag'
 let g:autotagCtagsCmd = "ctags -R --fields=+iaS --extra=+q ."
+
+" Syntax checking
+Plug 'scrooloose/syntastic'
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 " Auto complete
 Plug 'vim-scripts/OmniCppComplete'
