@@ -96,9 +96,9 @@ map Y y$
 " <C-L> disable higligthing
 nnoremap <C-L> :nohl<CR><C-L>
 
-map <F5> <ESC><C-]>
+map <F5> <C-]>
 imap <F5> <ESC><C-]>
-map <F6> <ESC><C-t>
+map <F6> <C-t>
 imap <F6> <ESC><C-t>
 
 
@@ -145,5 +145,8 @@ set completeopt=menuone,menu,longest,preview
 Plug 'vim-scripts/taglist.vim'
 let Tlist_Show_One_File = 1
 let Tlist_Show_Menu = 1
-let Tlist_Auto_Open = 1
+map <F7> :TlistOpen<CR>
+imap <F7> <ESC>:TlistOpen<CR>
+map <F8> :TlistClose<CR>
+imap <F8> <ESC>:TlistClose<CR>
 call plug#end()
