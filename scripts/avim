@@ -1,0 +1,3 @@
+#!/bin/bash
+echo "vim \`find $* -regex '.*\.\(h\|hh\|cpp\|cc\|c\)'\`"
+vim `find $* -regex '.*\.\(h\|hh\|cpp\|cc\|c\)'`
