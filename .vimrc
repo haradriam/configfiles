@@ -136,6 +136,7 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_c_include_dirs = ["inc","include","../inc","../include"]
+let g:syntastic_cpp_include_dirs = ["inc","include","../inc","../include"]
 
 " Easy jump to header file (:A to jump)
 Plug 'vim-scripts/a.vim'
