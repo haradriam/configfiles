@@ -96,10 +96,23 @@ map Y y$
 " <C-L> disable higligthing
 nnoremap <C-L> :nohl<CR><C-L>
 
+" Jump to function (ctags needed)
 map <F5> <C-]>
 imap <F5> <ESC><C-]>
+
+" Return to previous tag (ctags needed)
 map <F6> <C-t>
 imap <F6> <ESC><C-t>
+
+" Open/Close tag list (tag list pluggin needed)
+map <F7> :TlistOpen<CR>
+imap <F7> <ESC>:TlistOpen<CR>
+map <F8> :TlistClose<CR>
+imap <F8> <ESC>:TlistClose<CR>
+
+" Compile
+map <F9> :make<CR>
+imap <F9> <ESC>:make<CR>
 
 
 
@@ -123,7 +136,7 @@ Plug 'haradriam/hl_limits'
 
 " Auto reload tags file
 Plug 'craigemery/vim-autotag'
-let g:autotagCtagsCmd = "ctags -R --fields=+iaS --extra=+q ."
+let g:autotagCtagsCmd = "ctags -R --c++-kinds=+p --fields=+iaS --extra=+q ."
 
 " Syntax checking
 Plug 'scrooloose/syntastic'
@@ -145,13 +158,11 @@ Plug 'vim-scripts/a.vim'
 Plug 'vim-scripts/OmniCppComplete'
 au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif      
 set completeopt=menuone,menu,longest,preview
+let OmniCpp_ShowPrototypeInAbbr = 1
 
 " Tag list
 Plug 'vim-scripts/taglist.vim'
 let Tlist_Show_One_File = 1
 let Tlist_Show_Menu = 1
-map <F7> :TlistOpen<CR>
-imap <F7> <ESC>:TlistOpen<CR>
-map <F8> :TlistClose<CR>
-imap <F8> <ESC>:TlistClose<CR>
+let Tlist_Close_On_Select = 1
 call plug#end()
