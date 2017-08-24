@@ -669,7 +669,7 @@ files."""
                 name = directive[not enabled:]
                 try:
                     # it may actually start from last, but in this way repeated
-                    # modules can be handler transparently and without error
+                    # modules can be handled transparently and without error
                     todo = enumerate(modules[last:], start=last)
                     index = next(i for i, m in todo if name == m.name)
                     modules[index].enabled = enabled
@@ -680,7 +680,7 @@ files."""
                     def find_module(x):
                         return x.name == name
                     first_part = modules[:last]
-                    if len(filter(find_module, first_part)) == 0:
+                    if len(list(filter(find_module, first_part))) == 0:
                         Dashboard.err('Cannot find module "{}"'.format(name))
                     else:
                         Dashboard.err('Module "{}" already set'.format(name))
