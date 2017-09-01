@@ -25,6 +25,9 @@ set autoindent
 " Show line in the cursor
 set cursorline
 
+" Fix some issues with backspace
+set backspace=indent,eol,start
+
 " Enable folding and set no highligth for foldings
 set fdm=indent
 hi Folded ctermbg=NONE
