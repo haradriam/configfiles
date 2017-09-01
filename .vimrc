@@ -30,16 +30,7 @@ set fdm=indent
 hi Folded ctermbg=NONE
 
 " Show Git branch in status line (fugitive and lightline pluggins needed)
-let g:lightline = {
-      \ 'colorscheme': 'wombat',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-      \ },
-      \ 'component_function': {
-      \   'gitbranch': 'fugitive#head'
-      \ },
-      \ }
+let g:lightline = {'active': {'left': [['mode', 'paste'], ['gitbranch', 'readonly', 'filename', 'modified']]}, 'component_function': {'gitbranch': 'fugitive#head'}}
 
 
 
@@ -97,16 +88,22 @@ map Y y$
 nnoremap <C-L> :nohl<CR><C-L>
 
 " Jump to function (ctags needed)
-map <F5> <C-]>
-imap <F5> <ESC><C-]>
+map <F3> <C-]>
+imap <F3> <ESC><C-]>
 
 " Return to previous tag (ctags needed)
-map <F6> <C-t>
-imap <F6> <ESC><C-t>
+map <F4> <C-t>
+imap <F4> <ESC><C-t>
+
+" Open/Close file tree (NERDtree pluggin needed)
+map <F5> :NERDTree<CR>
+imap <F5> :NERDTree<CR>
+map <F6> :NERDTreeClose<CR>
+imap <F6> :NERDTreeClose<CR>
 
 " Open/Close tag list (tag list pluggin needed)
-map <F7> :TlistOpen<CR>
-imap <F7> <ESC>:TlistOpen<CR>
+map <F7> :Tlist<CR>
+imap <F7> <ESC>:Tlist<CR>
 map <F8> :TlistClose<CR>
 imap <F8> <ESC>:TlistClose<CR>
 
@@ -125,8 +122,9 @@ Plug 'godlygeek/tabular'
 Plug 'itchyny/lightline.vim'
 set laststatus=2
 
-" Git pluggin
+" Git pluggins
 Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 
 " Highligthing
 Plug 'mikelgarai/vim_hl'
@@ -156,6 +154,8 @@ Plug 'vim-scripts/a.vim'
 
 " Auto complete
 Plug 'vim-scripts/OmniCppComplete'
+Plug 'vim-scripts/AutoComplPop'
+Plug 'vim-scripts/SuperTab'
 au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif      
 set completeopt=menuone,menu,longest,preview
 let OmniCpp_ShowPrototypeInAbbr = 1
@@ -164,5 +164,16 @@ let OmniCpp_ShowPrototypeInAbbr = 1
 Plug 'vim-scripts/taglist.vim'
 let Tlist_Show_One_File = 1
 let Tlist_Show_Menu = 1
+let Tlist_Use_Right_Window = 1
+let Tlist_GainFocus_On_ToggleOpen = 1
 let Tlist_Close_On_Select = 1
+
+" NerdTree
+Plug 'scrooloose/nerdtree'
+let g:NERDTreeQuitOnOpen = 1
+
+" Conque GDB (mapping with \)
+Plug 'vim-scripts/Conque-GDB'
+
 call plug#end()
+
