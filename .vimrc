@@ -1,4 +1,4 @@
-" -------------------------------- Appearance ---------------------------------
+"-------------------------------- Appearance ---------------------------------
 " Theme
 colorscheme koehler
 
@@ -78,6 +78,9 @@ set pastetoggle=<F2>
 " Avoid generating swap files
 set noswapfile
 
+" At saving, remove all tailing whitespaces
+autocmd BufWritePre * %s/\s\+$//e
+
 
 
 " --------------------------------- Mappings ----------------------------------
@@ -149,19 +152,29 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-let g:syntastic_c_include_dirs = ["inc","include","../inc","../include"]
-let g:syntastic_cpp_include_dirs = ["inc","include","../inc","../include"]
+let g:syntastic_c_include_dirs = ["inc","include","../inc","../include","../Include"]
+let g:syntastic_cpp_include_dirs = ["inc","include","../inc","../include","../Include"]
 
 " Easy jump to header file (:A to jump)
 Plug 'vim-scripts/a.vim'
 
 " Auto complete
 Plug 'vim-scripts/OmniCppComplete'
-Plug 'vim-scripts/AutoComplPop'
-Plug 'vim-scripts/SuperTab'
-au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif      
-set completeopt=menuone,menu,longest,preview
 let OmniCpp_ShowPrototypeInAbbr = 1
+let OmniCpp_MayCompleteScope = 1
+
+Plug 'vim-scripts/AutoComplPop'
+let OmniCpp_ShowPrototypeInAbbr = 1
+au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+set completeopt=menuone,menu,longest,preview
+
+:inoremap <expr><Up> pumvisible() ? "<C-e><Up>" : "<Up>"
+:imap <ESC>[A <C-Up>
+:imap <expr><C-Up> pumvisible() ? "<C-p>" : "<Up>"
+
+:inoremap <expr><Down> pumvisible() ? "<C-e><Down>" : "<Down>"
+:imap <ESC>[B <C-Down>
+:imap <expr><C-Down> pumvisible() ? "<C-n>" : "<Down>"
 
 " Tag list
 Plug 'vim-scripts/taglist.vim'
@@ -179,4 +192,3 @@ let g:NERDTreeQuitOnOpen = 1
 Plug 'vim-scripts/Conque-GDB'
 
 call plug#end()
-
