@@ -133,10 +133,10 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
 " Highligthing
-Plug 'mikelgarai/vim_hl'
+Plug 'haradriam/vim_hl'
 
 " Highligth from column 81
-Plug 'haradriam/hl_limits'
+Plug 'haradriam/vim_hl_limits'
 
 " Auto reload tags file
 Plug 'craigemery/vim-autotag'
