@@ -1,4 +1,6 @@
+" -----------------------------------------------------------------------------
 "-------------------------------- Appearance ---------------------------------
+" -----------------------------------------------------------------------------
 " Theme
 colorscheme koehler
 
@@ -32,12 +34,11 @@ set backspace=indent,eol,start
 set fdm=indent
 hi Folded ctermbg=NONE
 
-" Show Git branch in status line (fugitive and lightline pluggins needed)
-let g:lightline = {'active': {'left': [['mode', 'paste'], ['gitbranch', 'readonly', 'filename', 'modified']]}, 'component_function': {'gitbranch': 'fugitive#head'}}
 
 
-
+" -----------------------------------------------------------------------------
 " ------------------------------ Search options -------------------------------
+" -----------------------------------------------------------------------------
 " Use case insensitive search, except when using capital letters
 set ignorecase
 set smartcase
@@ -50,7 +51,9 @@ set hlsearch
 
 
 
+" -----------------------------------------------------------------------------
 " --------------------------------- Behaviour ---------------------------------
+" -----------------------------------------------------------------------------
 " Allow jumping between buffers without lossing undos
 set hidden
 
@@ -83,7 +86,9 @@ autocmd BufWritePre * %s/\s\+$//e
 
 
 
+" -----------------------------------------------------------------------------
 " --------------------------------- Mappings ----------------------------------
+" -----------------------------------------------------------------------------
 "  Map <C-w> on insert mode to exit from insert mode first
 imap <C-w> <ESC><C-w>
 
@@ -102,16 +107,18 @@ map <F4> <C-t>
 imap <F4> <ESC><C-t>
 
 " Open/Close file tree (NERDtree pluggin needed)
-map <F5> :NERDTree<CR>
-imap <F5> :NERDTree<CR>
-map <F6> :NERDTreeClose<CR>
-imap <F6> :NERDTreeClose<CR>
+map <expr> <F5>
+    \ exists('t:NERDTreeBufName') && bufwinnr(t:NERDTreeBufName) != -1 ?
+    \     ':NERDTreeClose<CR>':
+    \     ':NERDTree<CR>'
+imap <expr> <F5>
+    \ exists('t:NERDTreeBufName') && bufwinnr(t:NERDTreeBufName) != -1 ?
+    \     '<ESC>:NERDTreeClose<CR>':
+    \     '<ESC>:NERDTree<CR>'
 
 " Open/Close tag list (tag list pluggin needed)
-map <F7> :Tlist<CR>
-imap <F7> <ESC>:Tlist<CR>
-map <F8> :TlistClose<CR>
-imap <F8> <ESC>:TlistClose<CR>
+map <F6> :Tlist<CR>
+imap <F6> <ESC>:Tlist<CR>
 
 " Compile
 map <F9> :make<CR>
@@ -119,7 +126,9 @@ imap <F9> <ESC>:make<CR>
 
 
 
+" -----------------------------------------------------------------------------
 " --------------------------------- Pluggins ----------------------------------
+" -----------------------------------------------------------------------------
 call plug#begin('~/.vim/plugged')
 " Easy allingment
 Plug 'godlygeek/tabular'
@@ -127,16 +136,28 @@ Plug 'godlygeek/tabular'
 " Enhanced status lines
 Plug 'itchyny/lightline.vim'
 set laststatus=2
+set noshowmode
+let g:lightline = {
+    \ 'active': {
+    \     'left': [['mode', 'paste'], ['gitbranch'],
+    \              ['readonly', 'filename', 'modified']]
+    \ },
+    \ 'component_function': {
+    \     'gitbranch': 'fugitive#head'
+    \}
+    \}
 
 " Git pluggins
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
+let g:gitgutter_map_keys = 0
 
 " Highligthing
 Plug 'haradriam/vim_hl'
 
 " Highligth from column 81
 Plug 'haradriam/vim_hl_limits'
+let g:hl_limits_columns = 80
 
 " Auto reload tags file
 Plug 'craigemery/vim-autotag'
@@ -150,10 +171,15 @@ set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
+let g:syntastic_loc_list_height=3
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_c_include_dirs = ["inc","include","../inc","../include","../Include"]
 let g:syntastic_cpp_include_dirs = ["inc","include","../inc","../include","../Include"]
+let g:syntastic_cpp_checkers = ["gcc"]
+let g:syntastic_cpp_config_file = '~/workspace/caf/.syntastic_cpp_config'
+
+let g:syntastic_aggregate_errors = 1
 
 " Easy jump to header file (:A to jump)
 Plug 'vim-scripts/a.vim'
@@ -176,6 +202,8 @@ set completeopt=menuone,menu,longest,preview
 :imap <ESC>[B <C-Down>
 :imap <expr><C-Down> pumvisible() ? "<C-n>" : "<Down>"
 
+set tags+=~/.vim/tags/cpp
+
 " Tag list
 Plug 'vim-scripts/taglist.vim'
 let Tlist_Show_One_File = 1
@@ -191,4 +219,23 @@ let g:NERDTreeQuitOnOpen = 1
 " Conque GDB (mapping with \)
 Plug 'vim-scripts/Conque-GDB'
 
+" Multiple cursors
+Plug 'terryma/vim-multiple-cursors'
+let g:multi_cursor_select_all_word_key = '<C-a>'
+
+function! Multiple_cursors_before()
+   if exists(':AutoComplPopDisable')==2
+      exe 'AutoComplPopDisable'
+      let g:OmniCpp_MayCompleteDot = 0
+      let g:OmniCpp_MayCompleteArrow = 0
+   endif
+endfunction
+
+function! Multiple_cursors_after()
+   if exists(':AutoComplPopEnable')==2
+      exe 'AutoComplPopEnable'
+      let g:OmniCpp_MayCompleteDot = 1
+      let g:OmniCpp_MayCompleteArrow = 1
+   endif
+endfunction
 call plug#end()
