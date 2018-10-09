@@ -2,7 +2,8 @@
 "-------------------------------- Appearance ---------------------------------
 " -----------------------------------------------------------------------------
 " Theme
-colorscheme koehler
+colorscheme molokai
+let g:molokai_original = 1
 
 " Enable syntax highlighting
 syntax on
@@ -160,8 +161,13 @@ Plug 'haradriam/vim_hl_limits'
 let g:hl_limits_columns = 80
 
 " Auto reload tags file
-Plug 'craigemery/vim-autotag'
-let g:autotagCtagsCmd = "ctags -R --c++-kinds=+p --fields=+iaS --extra=+q ."
+" It will find for file listed on gutentags_project_root in order to define
+" where to set the project root.
+Plug 'ludovicchabant/vim-gutentags'
+let g:gutentags_ctags_tagfile= '.tags'
+let g:gutentags_add_default_project_roots = 0
+let g:gutentags_project_root = ['.tags','.local.vimrc', '.vimrc']
+
 
 " Syntax checking
 Plug 'scrooloose/syntastic'
@@ -174,10 +180,10 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_loc_list_height=3
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-let g:syntastic_c_include_dirs = ["inc","include","../inc","../include","../Include"]
-let g:syntastic_cpp_include_dirs = ["inc","include","../inc","../include","../Include"]
-let g:syntastic_cpp_checkers = ["gcc"]
-let g:syntastic_cpp_config_file = '~/workspace/caf/.syntastic_cpp_config'
+let g:syntastic_c_include_dirs = ['inc', 'include', '../inc', '../include']
+let g:syntastic_cpp_include_dirs = ['inc', 'include', '../inc', '../include']
+let g:syntastic_cpp_checkers = ['gcc']
+let g:syntastic_cpp_config_file = '~/.syntastic_cpp_config'
 
 let g:syntastic_aggregate_errors = 1
 
@@ -238,4 +244,11 @@ function! Multiple_cursors_after()
       let g:OmniCpp_MayCompleteArrow = 1
    endif
 endfunction
+
+" Project specific vimrc
+Plug 'https://github.com/thinca/vim-localrc.git'
+
+" Molokai colorscheme (colors folder needs to be copied to .vim folder)
+" Replace also 'Visual' and VirsualNOS values with '#585858' or 240
+Plug 'tomasr/molokai'
 call plug#end()
