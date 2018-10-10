@@ -167,6 +167,7 @@ Plug 'ludovicchabant/vim-gutentags'
 let g:gutentags_ctags_tagfile= '.tags'
 let g:gutentags_add_default_project_roots = 0
 let g:gutentags_project_root = ['.tags','.local.vimrc', '.vimrc']
+let g:gutentags_ctags_extra_args = ['--c++-kinds=+p', '--fields=+iaS', '--extra=+q']
 
 
 " Syntax checking
