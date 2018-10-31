@@ -202,11 +202,11 @@ au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 set completeopt=menuone,menu,longest,preview
 
 :inoremap <expr><Up> pumvisible() ? "<C-e><Up>" : "<Up>"
-:imap <ESC>[A <C-Up>
+:imap <ESC>[1;5A <C-Up>
 :imap <expr><C-Up> pumvisible() ? "<C-p>" : "<Up>"
 
 :inoremap <expr><Down> pumvisible() ? "<C-e><Down>" : "<Down>"
-:imap <ESC>[B <C-Down>
+:imap <ESC>[1;5B <C-Down>
 :imap <expr><C-Down> pumvisible() ? "<C-n>" : "<Down>"
 
 set tags+=~/.vim/tags/cpp
