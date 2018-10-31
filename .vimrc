@@ -31,8 +31,9 @@ set cursorline
 " Fix some issues with backspace
 set backspace=indent,eol,start
 
-" Enable folding and set no highligth for foldings
+" Enable folding and set no highligth for foldings (zc to enable folding)
 set fdm=indent
+set nofoldenable
 hi Folded ctermbg=NONE
 
 
@@ -99,13 +100,8 @@ map Y y$
 " <C-L> disable higligthing
 nnoremap <C-L> :nohl<CR><C-L>
 
-" Jump to function (ctags needed)
-map <F3> <C-]>
-imap <F3> <ESC><C-]>
-
-" Return to previous tag (ctags needed)
-map <F4> <C-t>
-imap <F4> <ESC><C-t>
+" Disable folding
+map <F3> :set nofoldenable<CR>
 
 " Open/Close file tree (NERDtree pluggin needed)
 map <expr> <F5>
@@ -120,6 +116,14 @@ imap <expr> <F5>
 " Open/Close tag list (tag list pluggin needed)
 map <F6> :Tlist<CR>
 imap <F6> <ESC>:Tlist<CR>
+
+" Jump to function (ctags needed)
+map <F7> <C-]>
+imap <F7> <ESC><C-]>
+
+" Return to previous tag (ctags needed)
+map <F8> <C-t>
+imap <F8> <ESC><C-t>
 
 " Compile
 map <F9> :make<CR>
