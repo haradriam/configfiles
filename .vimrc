@@ -159,6 +159,7 @@ Plug 'haradriam/vim_hl'
 " Highligth from column 81
 Plug 'haradriam/vim_hl_limits'
 let g:hl_limits_columns = 80
+autocmd VimEnter * HlLimitsUpdate
 
 " Auto reload tags file
 " It will find for file listed on gutentags_project_root in order to define
