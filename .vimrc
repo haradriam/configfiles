@@ -31,9 +31,9 @@ set cursorline
 " Fix some issues with backspace
 set backspace=indent,eol,start
 
-" Enable folding and set no highligth for foldings (zc to enable folding)
+" Enable folding and set no highligth for foldings
 set fdm=indent
-set nofoldenable
+set foldlevelstart=99
 hi Folded ctermbg=NONE
 
 
@@ -101,7 +101,10 @@ map Y y$
 nnoremap <C-L> :nohl<CR><C-L>
 
 " Disable folding
-map <F3> :set nofoldenable<CR>
+map <expr> <F3>
+    \ &foldlevel == 0 ?
+    \ ':set foldlevel=99<CR>' :
+    \ ':set foldlevel=0<CR>'
 
 " Open/Close file tree (NERDtree pluggin needed)
 map <expr> <F5>
@@ -169,7 +172,7 @@ autocmd VimEnter * HlLimitsUpdate
 " It will find for file listed on gutentags_project_root in order to define
 " where to set the project root.
 Plug 'ludovicchabant/vim-gutentags'
-let g:gutentags_ctags_tagfile= '.tags'
+let g:gutentags_ctags_tagfile = '.tags'
 let g:gutentags_add_default_project_roots = 0
 let g:gutentags_project_root = ['.tags','.local.vimrc', '.vimrc']
 let g:gutentags_ctags_extra_args = ['--c++-kinds=+p', '--fields=+iaS', '--extra=+q']
