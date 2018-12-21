@@ -25,8 +25,8 @@ set expandtab
 " Auto indent
 set autoindent
 
-" Show line in the cursor
-set cursorline
+" Show line in the cursor (disable for performance in current version)
+" set cursorline
 
 " Fix some issues with backspace
 set backspace=indent,eol,start
