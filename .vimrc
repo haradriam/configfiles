@@ -200,6 +200,9 @@ let g:syntastic_aggregate_errors = 1
 Plug 'vim-scripts/a.vim'
 
 " Auto complete
+"
+" To get correct escape sequence for C-Arrow, type Ctrl + V in insert mode and
+" push sequence Ctrl + Arrow to print correct sequence.
 Plug 'vim-scripts/OmniCppComplete'
 let OmniCpp_ShowPrototypeInAbbr = 1
 let OmniCpp_MayCompleteScope = 1
