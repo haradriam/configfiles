@@ -128,9 +128,12 @@ imap <F7> <ESC><C-]>
 map <F8> <C-t>
 imap <F8> <ESC><C-t>
 
-" Compile
-map <F9> :make<CR>
-imap <F9> <ESC>:make<CR>
+" Jump to next error
+map <F9> :lnext<CR>
+imap <F9> <ESC>:lnext<CR>
+" Jump to previous error
+map <F10> :lprev<CR>
+imap <F10> <ESC>:lprev<CR>
 
 
 
