@@ -51,6 +51,9 @@ set incsearch
 " Highlight searches (use <C-L> to temporarily turn off highlighting)
 set hlsearch
 
+" Replace all ocurrences of word under cursor [\s]
+:nnoremap <Leader>s :%s/\<<C-r><C-w>\>//g<Left><Left>
+
 
 
 " -----------------------------------------------------------------------------
@@ -207,13 +210,21 @@ Plug 'vim-scripts/a.vim'
 " To get correct escape sequence for C-Arrow, type Ctrl + V in insert mode and
 " push sequence Ctrl + Arrow to print correct sequence.
 Plug 'vim-scripts/OmniCppComplete'
+let OmniCpp_NamespaceSearch = 1
+let OmniCpp_GlobalScopeSearch = 1
+let OmniCpp_ShowAccess = 1
 let OmniCpp_ShowPrototypeInAbbr = 1
+let OmniCpp_MayCompleteDot = 1
+let OmniCpp_MayCompleteArrow = 1
 let OmniCpp_MayCompleteScope = 1
+let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
 
 Plug 'vim-scripts/AutoComplPop'
-let OmniCpp_ShowPrototypeInAbbr = 1
 au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 set completeopt=menuone,menu,longest,preview
+
+Plug 'ervandew/supertab'
+let g:SuperTabDefaultCompletionType = "<C-n>"
 
 :inoremap <expr><Up> pumvisible() ? "<C-e><Up>" : "<Up>"
 :imap <ESC>[1;5A <C-Up>
@@ -236,9 +247,6 @@ let Tlist_Close_On_Select = 1
 " NerdTree
 Plug 'scrooloose/nerdtree'
 let g:NERDTreeQuitOnOpen = 1
-
-" Conque GDB (mapping with \)
-Plug 'vim-scripts/Conque-GDB'
 
 " Multiple cursors
 Plug 'terryma/vim-multiple-cursors'
