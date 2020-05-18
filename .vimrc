@@ -138,6 +138,13 @@ imap <F9> <ESC>:lnext<CR>
 map <F10> :lprev<CR>
 imap <F10> <ESC>:lprev<CR>
 
+" Tabs
+nnoremap tc :tabnew<Space><CR>
+nnoremap tn :tabnext<CR>
+nnoremap tp :tabprev<CR>
+nnoremap tf :tabfirst<CR>
+nnoremap tl :tablast<CR>
+
 
 
 " -----------------------------------------------------------------------------
