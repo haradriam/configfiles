@@ -52,7 +52,7 @@ set incsearch
 set hlsearch
 
 " Replace all ocurrences of word under cursor [\s]
-:nnoremap <Leader>s :%s/\<<C-r><C-w>\>//g<Left><Left>
+:nnoremap <Leader>s :%s/\<<C-r><C-w>\>/<C-r><C-w>/g<Left><Left>
 
 
 
