@@ -1,5 +1,5 @@
 " -----------------------------------------------------------------------------
-"-------------------------------- Appearance ---------------------------------
+" -------------------------------- Appearance ---------------------------------
 " -----------------------------------------------------------------------------
 " Theme
 colorscheme molokai
@@ -110,14 +110,8 @@ map <expr> <F3>
     \ ':set foldlevel=0<CR>'
 
 " Open/Close file tree (NERDtree pluggin needed)
-map <expr> <F5>
-    \ exists('t:NERDTreeBufName') && bufwinnr(t:NERDTreeBufName) != -1 ?
-    \     ':NERDTreeClose<CR>':
-    \     ':NERDTree<CR>'
-imap <expr> <F5>
-    \ exists('t:NERDTreeBufName') && bufwinnr(t:NERDTreeBufName) != -1 ?
-    \     '<ESC>:NERDTreeClose<CR>':
-    \     '<ESC>:NERDTree<CR>'
+nmap <F5> :NERDTreeToggle<CR>
+imap <F5> :NERDTreeToggle<CR>
 
 " Open/Close tag list (tag list pluggin needed)
 map <F6> :Tlist<CR>
