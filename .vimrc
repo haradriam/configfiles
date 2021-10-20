@@ -196,6 +196,11 @@ let g:hl_limits_columns = 80
 autocmd VimEnter * HlLimitsUpdate
 
 " Gruvbox colorscheme
+" By default, this coloscheme disable highligthing on debugging. To enable it,
+" set the follworing line at the end of the cholorscheme file (located at
+" .vim/plugged/gruvbox/colors/gruvbox.vim):
+"
+" hi debugPC term=reverse ctermbg=4 guibg=darkblue
 Plug 'morhetz/gruvbox'
 autocmd vimenter * ++nested colorscheme gruvbox
 set background=dark
