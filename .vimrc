@@ -241,7 +241,3 @@ Plug 'aklt/plantuml-syntax'
 " Copilot
 Plug 'github/copilot.vim'
 call plug#end()
-
-" Source the termdebug plugin
-packadd termdebug
-let g:termdebug_wide=1
