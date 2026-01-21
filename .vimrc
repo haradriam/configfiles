@@ -3,7 +3,11 @@
 " -----------------------------------------------------------------------------
 " Enable syntax highlighting
 syntax on
-colorscheme torte
+if empty(globpath(&rtp, "colors/torte.vim"))
+    colorscheme default
+else
+    colorscheme torte
+endif
 
 " Display line numbers on the left
 set number
@@ -18,6 +22,10 @@ set sidescrolloff=3
 set shiftwidth=4
 set softtabstop=4
 set expandtab
+
+" Improve redraw/performance
+set lazyredraw
+set updatetime=300
 
 " Auto indent
 set autoindent
@@ -84,7 +92,10 @@ set pastetoggle=<F2>
 set noswapfile
 
 " At saving, remove all tailing whitespaces
-autocmd BufWritePre * %s/\s\+$//e
+augroup trim_trailing_ws
+    autocmd!
+    autocmd BufWritePre * %s/\s\+$//e
+augroup END
 
 " Automatically open QuickFix window after using :grep
 augroup quickfix
@@ -99,39 +110,39 @@ augroup END
 " --------------------------------- Mappings ----------------------------------
 " -----------------------------------------------------------------------------
 "  Map <C-w> on insert mode to exit from insert mode first
-imap <C-w> <ESC><C-w>
+inoremap <C-w> <ESC><C-w>
 
 " Y acts as C or D
-map Y y$
+nnoremap Y y$
 
-" <C-L> disable higligthing
+" <C-L> disable highlighting
 nnoremap <C-L> :nohl<CR><C-L>
 
 " Enable/Disable folding
-map <expr> <F3>
+nnoremap <expr> <F3>
     \ &foldlevel == 0 ?
     \ ':set foldlevel=99<CR>' :
     \ ':set foldlevel=0<CR>'
 
-" Open FZF searcher (FZF pluggin needed)
-nmap <F4> :Files<CR>
-imap <F4> :Files<CR>
+" Open FZF searcher (FZF plugin needed)
+nnoremap <F4> :Files<CR>
+inoremap <F4> <ESC>:Files<CR>
 
-" Open/Close file tree (NERDtree pluggin needed)
-nmap <F5> :NERDTreeToggle<CR>
-imap <F5> :NERDTreeToggle<CR>
+" Open/Close file tree (NERDTree plugin needed)
+nnoremap <F5> :NERDTreeToggle<CR>
+inoremap <F5> <ESC>:NERDTreeToggle<CR>
 
-" Open/Close tag list (tag list pluggin needed)
-map <F6> :Tlist<CR>
-imap <F6> <ESC>:Tlist<CR>
+" Open/Close tag list (tag list plugin needed)
+nnoremap <F6> :Tlist<CR>
+inoremap <F6> <ESC>:Tlist<CR>
 
 " Jump to function (YouCompleteMe needed)
-map <F7> :YcmCompleter GoToDefinition<CR>
-imap <F7> <ESC>:YcmCompleter GoToDefinition<CR>
+nnoremap <F7> :YcmCompleter GoToDefinition<CR>
+inoremap <F7> <ESC>:YcmCompleter GoToDefinition<CR>
 
 " Return to previous tag (YouCompleteMe needed)
-map <F8> <C-o>
-imap <F8> <ESC><C-o>
+nnoremap <F8> <C-o>
+inoremap <F8> <ESC><C-o>
 
 " Tabs
 nnoremap tc :tabnew<Space><CR>
@@ -214,4 +225,3 @@ call plug#end()
 " Source the termdebug plugin
 packadd termdebug
 let g:termdebug_wide=1
-
