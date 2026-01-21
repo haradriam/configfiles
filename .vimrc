@@ -66,14 +66,14 @@ set incsearch
 set hlsearch
 
 " Replace all ocurrences of word under cursor [\s]
-:nnoremap <Leader>s :%s/\<<C-r><C-w>\>/<C-r><C-w>/g<Left><Left>
+nnoremap <Leader>s :%s/\<<C-r><C-w>\>/<C-r><C-w>/g<Left><Left>
 
 
 
 " -----------------------------------------------------------------------------
 " --------------------------------- Behaviour ---------------------------------
 " -----------------------------------------------------------------------------
-" Allow jumping between buffers without lossing undos
+" Allow jumping between buffers without losing undos
 set hidden
 
 " Enable mouse where the terminal supports it; avoid issues on dumb/serial terms
@@ -95,7 +95,7 @@ set confirm
 " Buffer size for changes storing
 set undolevels=1000
 
-" Avoid distro especific modifications
+" Avoid distro specific modifications
 set nocompatible
 
 " Use <F2> to toggle between 'paste' and 'nopaste'
@@ -104,7 +104,7 @@ set pastetoggle=<F2>
 " Avoid generating swap files
 set noswapfile
 
-" At saving, remove all tailing whitespaces
+" At saving, remove all trailing whitespaces
 augroup trim_trailing_ws
     autocmd!
     autocmd BufWritePre * %s/\s\+$//e
@@ -171,7 +171,7 @@ nnoremap tl :tablast<CR>
 
 
 " -----------------------------------------------------------------------------
-" --------------------------------- Pluggins ----------------------------------
+" --------------------------------- Plugins -----------------------------------
 " -----------------------------------------------------------------------------
 call plug#begin('~/.vim/plugged')
 " Cool status bar
@@ -186,7 +186,7 @@ Plug 'mhinz/vim-signify'
 
 
 " NerdTree
-Plug 'scrooloose/nerdtree'
+Plug 'preservim/nerdtree'
 let g:NERDTreeQuitOnOpen = 1
 let g:NERDTreeShowHidden = 1
 let g:NERDTreeRespectWildIgnore = 1
@@ -225,7 +225,10 @@ Plug 'haradriam/vim_hl'
 " Highlight from column 81
 Plug 'haradriam/vim_hl_limits'
 let g:hl_limits_columns = 80
-autocmd VimEnter * HlLimitsUpdate
+augroup hl_limits
+    autocmd!
+    autocmd VimEnter * HlLimitsUpdate
+augroup END
 
 
 
