@@ -28,9 +28,19 @@ features for, you must install the corresponding language server binary.
 | --- | --- | --- | --- |
 | C/C++ | `clangd` | `sudo apt install clangd` | Used for navigation/completion in `.c/.cpp` |
 | Python | `pylsp` | `sudo apt install python3-pylsp` | Used for navigation/completion in `.py` |
+| Bash/sh | `bash-language-server` | `npm i -g bash-language-server` | Uses Node.js/npm |
+| Go | `gopls` | `sudo apt install gopls` | Used for navigation/completion in `.go` |
+| Rust | `rust-analyzer` | `rustup component add rust-analyzer` | Uses rustup |
+| YAML | `yaml-language-server` | `npm i -g yaml-language-server` | Uses Node.js/npm |
+| JSON | `vscode-json-language-server` | `npm i -g vscode-langservers-extracted` | Uses Node.js/npm |
+| Markdown | `marksman` | `cargo install --locked marksman` | Uses Rust/cargo |
 
 In Vim, you can check the active servers with `:LspStatus`. If something does
 not start, inspect `:messages`.
+
+Notes:
+- Node-based servers require `node` + `npm`.
+- Rust-based installs require `rustup`/`cargo`.
 
 ### Navigation
 

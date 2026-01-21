@@ -277,6 +277,7 @@ if exists('*lsp#complete')
     augroup lsp_omnifunc
         autocmd!
         autocmd FileType c,cpp,objc,objcpp,python setlocal omnifunc=lsp#complete
+        autocmd FileType sh,zsh,go,rust,yaml,json,markdown setlocal omnifunc=lsp#complete
     augroup END
 endif
 
