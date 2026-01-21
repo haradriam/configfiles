@@ -119,10 +119,14 @@ nnoremap Y y$
 nnoremap <C-L> :nohl<CR><C-L>
 
 " Enable/Disable folding
-nnoremap <expr> <F3>
-    \ &foldlevel == 0 ?
-    \ ':set foldlevel=99<CR>' :
-    \ ':set foldlevel=0<CR>'
+function! ToggleFolds()
+    if &foldlevel == 0
+        set foldlevel=99
+    else
+        set foldlevel=0
+    endif
+endfunction
+nnoremap <F3> :call ToggleFolds()<CR>
 
 " Open FZF searcher (FZF plugin needed)
 nnoremap <F4> :Files<CR>
