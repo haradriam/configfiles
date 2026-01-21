@@ -168,6 +168,16 @@ nnoremap tp :tabprev<CR>
 nnoremap tf :tabfirst<CR>
 nnoremap tl :tablast<CR>
 
+" Git (vim-fugitive)
+nnoremap <F9> :Git<CR>
+inoremap <F9> <ESC>:Git<CR>
+
+" Diff navigation and operations
+nnoremap <M-Down> ]c
+nnoremap <M-Up> [c
+nnoremap <M-Right> :diffget<CR>
+nnoremap <M-Left> :diffput<CR>
+
 
 
 " -----------------------------------------------------------------------------

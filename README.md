@@ -13,10 +13,21 @@
 | `F6` | Normal/Insert | TagList toggle |
 | `F7` | Normal/Insert | Go to definition (YCM) |
 | `F8` | Normal/Insert | Jump back (`<C-o>`) |
+| `F9` | Normal/Insert | Open Git console (`:Git`) |
 | `Y` | Normal | Yank to end of line |
 | `<C-L>` | Normal | Clear search highlight |
 | `<Leader>s` | Normal | Replace word under cursor in the whole buffer |
 | `tc/tn/tp/tf/tl` | Normal | New tab / next / previous / first / last |
+
+### Diff workflow
+Use `:Gdiff` or `:Gvdiffsplit` (from vim-fugitive) to open a diff view against HEAD.
+
+| Key | Action |
+| --- | --- |
+| `Alt+Down` | Jump to next diff (`]c`) |
+| `Alt+Up` | Jump to previous diff (`[c`) |
+| `Alt+Right` | Get change from other buffer (`:diffget`) |
+| `Alt+Left` | Put change to other buffer (`:diffput`) |
 
 ## TMUX
 
