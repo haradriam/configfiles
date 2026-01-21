@@ -76,8 +76,12 @@ set hlsearch
 " Allow jumping between buffers without lossing undos
 set hidden
 
-" Enable use of the mouse for all modes
-set mouse=a
+" Enable mouse where the terminal supports it; avoid issues on dumb/serial terms
+if $TERM =~ 'xterm' || $TERM =~ 'screen' || $TERM =~ 'tmux'
+    set mouse=a
+else
+    set mouse=
+endif
 
 " Hide the mouse when typing text
 set mousehide
@@ -200,6 +204,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 let g:fzf_preview_window = 'right:50%'
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6  }  }
+let g:fzf_buffers_jump = 1
 
 " Easy jump to header file (:A to jump)
 Plug 'vim-scripts/a.vim'
