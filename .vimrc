@@ -45,7 +45,7 @@ set autoindent
 " Fix some issues with backspace
 set backspace=indent,eol,start
 
-" Enable folding and set no highligth for foldings
+" Enable folding and set no highlight for foldings
 set fdm=indent
 set foldlevelstart=99
 hi Folded ctermbg=NONE
@@ -214,15 +214,15 @@ Plug 'https://github.com/thinca/vim-localrc.git'
 
 
 
-" Easy allingment
+" Easy alignment
 Plug 'godlygeek/tabular'
 
 
 
-" Highligthing
+" Highlighting
 Plug 'haradriam/vim_hl'
 
-" Highligth from column 81
+" Highlight from column 81
 Plug 'haradriam/vim_hl_limits'
 let g:hl_limits_columns = 80
 autocmd VimEnter * HlLimitsUpdate
