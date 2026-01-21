@@ -1,8 +1,8 @@
 # Configuration files
 
 ## VIM
-- Some mappings use `<C-Arrow>`; to see your terminal sequence, use `od -a`.
-- Generate C++ stdlib ctags: `ctags -f ~/.vim/tags/cpp -R --c++-kinds=+p --fields=+iaS --extra=+q -I "_GLIBCXX_BEGIN_NAMESPACE_VERSION _GLIBCXX_END_NAMESPACE_VERSION _GLIBCXX_VISIBILITY+" -n /usr/include/c++/7/*`
+
+### Bindings
 
 | Key | Mode | Action |
 | --- | --- | --- |
@@ -11,7 +11,7 @@
 | `F4` | Normal/Insert | FZF files |
 | `F5` | Normal/Insert | NERDTree toggle |
 | `F6` | Normal/Insert | TagList toggle |
-| `F7` | Normal/Insert | Go to definition (YCM) |
+| `F7` | Normal/Insert | LSP: go to definition |
 | `F8` | Normal/Insert | Jump back (`<C-o>`) |
 | `F9` | Normal/Insert | Open Git console (`:Git`) |
 | `Y` | Normal | Yank to end of line |
@@ -19,8 +19,38 @@
 | `<Leader>s` | Normal | Replace word under cursor in the whole buffer |
 | `tc/tn/tp/tf/tl` | Normal | New tab / next / previous / first / last |
 
+### Language servers (LSP)
+
+This setup uses `vim-lsp` + `vim-lsp-settings`. For each language you want LSP
+features for, you must install the corresponding language server binary.
+
+| Language | Server | Install | Notes |
+| --- | --- | --- | --- |
+| C/C++ | `clangd` | `sudo apt install clangd` | Used for navigation/completion in `.c/.cpp` |
+| Python | `pylsp` | `sudo apt install python3-pylsp` | Used for navigation/completion in `.py` |
+
+In Vim, you can check the active servers with `:LspStatus`. If something does
+not start, inspect `:messages`.
+
+### Navigation
+
+| Key | Mode | Action |
+| --- | --- | --- |
+| `gd` | Normal | LSP: go to definition |
+| `gD` | Normal | LSP: go to declaration |
+| `gr` | Normal | LSP: references |
+| `gh` | Normal | LSP: hover |
+| `gb` | Normal | Jump back (`<C-o>`) |
+
+### Project local vimrc
+Project-specific settings are supported via `vim-localrc`.
+
+- Default filename: `.local.vimrc` (loaded from the current directory and its
+  parents)
+- Typical use: set indentation per project, set `g:hl_limits_columns`, etc.
+
 ### Diff workflow
-Use `:Gdiff` or `:Gvdiffsplit` (from vim-fugitive) to open a diff view against HEAD.
+After `F9` press `dd` over the file to compare against HEAD.
 
 | Key | Action |
 | --- | --- |
@@ -42,3 +72,5 @@ Use `:Gdiff` or `:Gvdiffsplit` (from vim-fugitive) to open a diff view against H
 | `v` (copy-mode) | Start selection |
 | `y` (copy-mode) | Copy selection |
 | `p` | Paste buffer |
+
+Some mappings use `<C-Arrow>`; to see your terminal sequence, use `od -a`.

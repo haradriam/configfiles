@@ -153,13 +153,27 @@ inoremap <F5> <ESC>:NERDTreeToggle<CR>
 nnoremap <F6> :Tlist<CR>
 inoremap <F6> <ESC>:Tlist<CR>
 
-" Jump to function (YouCompleteMe needed)
-nnoremap <F7> :YcmCompleter GoToDefinition<CR>
-inoremap <F7> <ESC>:YcmCompleter GoToDefinition<CR>
+" LSP navigation (vim-lsp)
+nnoremap <F7> :LspDefinition<CR>
+inoremap <F7> <ESC>:LspDefinition<CR>
 
-" Return to previous tag (YouCompleteMe needed)
+" Return to previous location
 nnoremap <F8> <C-o>
 inoremap <F8> <ESC><C-o>
+
+" Alternatives that work reliably in terminals
+" gd/gD are built-in Vim motions; we intentionally override them for LSP.
+nnoremap gd :LspDefinition<CR>
+nnoremap gD :LspDeclaration<CR>
+nnoremap gr :LspReferences<CR>
+nnoremap gh :LspHover<CR>
+
+" Leader-based fallbacks
+nnoremap <Leader>ld :LspDefinition<CR>
+nnoremap <Leader>lD :LspDeclaration<CR>
+nnoremap <Leader>lr :LspReferences<CR>
+nnoremap <Leader>lh :LspHover<CR>
+nnoremap gb <C-o>
 
 " Tabs
 nnoremap tc :tabnew<Space><CR>
@@ -242,11 +256,11 @@ augroup END
 
 
 
-" Autocompletion. Follow Github installation instructions.
-Plug 'ycm-core/YouCompleteMe'
-let g:ycm_confirm_extra_conf = 0
-let g:ycm_collect_identifiers_from_tags_files=1
-let g:ycm_seed_identifiers_with_syntax = 1
+" LSP + completion (clangd via vim-lsp-settings)
+Plug 'prabirshrestha/vim-lsp'
+Plug 'mattn/vim-lsp-settings'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
 
 " PlantUML syntax
 Plug 'aklt/plantuml-syntax'
@@ -254,3 +268,43 @@ Plug 'aklt/plantuml-syntax'
 " Copilot
 Plug 'github/copilot.vim'
 call plug#end()
+
+" ----------------------------------------------------------------------------
+" ----------------------------------- LSP -----------------------------------
+" ----------------------------------------------------------------------------
+" Enable LSP completion through omnifunc (<C-x><C-o>) and asyncomplete.
+if exists('*lsp#complete')
+    augroup lsp_omnifunc
+        autocmd!
+        autocmd FileType c,cpp,objc,objcpp,python setlocal omnifunc=lsp#complete
+    augroup END
+endif
+
+" Python LSP
+" Prefer a system-installed pylsp, but also support a user venv install at:
+" ~/.local/venvs/pylsp/bin/pylsp
+if exists('*lsp#register_server')
+    augroup lsp_python
+        autocmd!
+        autocmd User lsp_setup call s:maybe_register_pylsp()
+    augroup END
+
+    function! s:maybe_register_pylsp() abort
+        if executable('pylsp')
+            let l:cmd = ['pylsp']
+        else
+            let l:pylsp = expand('~/.local/venvs/pylsp/bin/pylsp')
+            if executable(l:pylsp)
+                let l:cmd = [l:pylsp]
+            else
+                return
+            endif
+        endif
+
+        call lsp#register_server({
+            \ 'name': 'pylsp',
+            \ 'cmd': l:cmd,
+            \ 'allowlist': ['python'],
+            \ })
+    endfunction
+endif

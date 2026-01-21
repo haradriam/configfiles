@@ -42,7 +42,7 @@ Repository scope: personal dotfiles (vim, zsh, tmux, helper scripts). There are 
 - Confirm on quit: `confirm` enabled; scripts should avoid forced exits.
 - Swap files: disabled (`noswapfile`); prefer version control for safety.
 - Undo levels: 1000; avoid gigantic generated buffers in repo.
-- Plugins used: vim-airline, vim-fugitive, vim-signify, nerdtree, taglist, fzf, a.vim, vim-localrc, tabular, vim_hl, vim_hl_limits, YouCompleteMe, plantuml-syntax, github/copilot.vim.
+- Plugins used: vim-airline, vim-fugitive, vim-signify, nerdtree, taglist, fzf, a.vim, vim-localrc, tabular, vim_hl, vim_hl_limits, vim-lsp, vim-lsp-settings, asyncomplete.vim, asyncomplete-lsp.vim, plantuml-syntax, github/copilot.vim.
 - Avoid adding heavy plugins that require system-wide builds unless documented.
 
 ## Import and dependency guidance
@@ -91,8 +91,17 @@ Repository scope: personal dotfiles (vim, zsh, tmux, helper scripts). There are 
 - F4: FZF file search (requires plugin).
 - F5: NERDTree toggle.
 - F6: TagList toggle.
-- F7: YouCompleteMe go-to-definition.
-- F8: return to previous tag.
+- F7: LspDefinition.
+- gd: LspDefinition.
+- gD: LspDeclaration.
+- gr: LspReferences.
+- <Leader>ld: LspDefinition.
+- <Leader>lD: LspDeclaration.
+- <Leader>lr: LspReferences.
+- gh: LspHover.
+- <Leader>lh: LspHover.
+- F8: jump back (previous location).
+- gb: jump back (previous location).
 - Tab management: `tc` new tab, `tn` next, `tp` prev, `tf` first, `tl` last.
 - Quick search replace: `<Leader>s` replaces word under cursor.
 - `<C-L>` clears search highlighting.
