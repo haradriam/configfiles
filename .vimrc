@@ -3,6 +3,7 @@
 " -----------------------------------------------------------------------------
 " Enable syntax highlighting
 syntax on
+colorscheme torte
 
 " Display line numbers on the left
 set number
@@ -195,23 +196,19 @@ Plug 'haradriam/vim_hl_limits'
 let g:hl_limits_columns = 80
 autocmd VimEnter * HlLimitsUpdate
 
-" Gruvbox colorscheme
-" By default, this coloscheme disable highligthing on debugging. To enable it,
-" set the follworing line at the end of the cholorscheme file (located at
-" .vim/plugged/gruvbox/colors/gruvbox.vim):
-"
-" hi debugPC term=reverse ctermbg=4 guibg=darkblue
-Plug 'morhetz/gruvbox'
-autocmd vimenter * ++nested colorscheme gruvbox
-set background=dark
-
-
 
 
 " Autocompletion. Follow Github installation instructions.
 Plug 'ycm-core/YouCompleteMe'
 let g:ycm_confirm_extra_conf = 0
+let g:ycm_collect_identifiers_from_tags_files=1
+let g:ycm_seed_identifiers_with_syntax = 1
 
+" PlantUML syntax
+Plug 'aklt/plantuml-syntax'
+
+" Copilot
+Plug 'github/copilot.vim'
 call plug#end()
 
 " Source the termdebug plugin
