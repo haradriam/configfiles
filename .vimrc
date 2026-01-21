@@ -27,6 +27,15 @@ set expandtab
 set lazyredraw
 set updatetime=300
 
+" Persistent undo
+set undofile
+let s:undodir = expand('~/.vim/undo')
+if !isdirectory(s:undodir)
+    call mkdir(s:undodir, 'p')
+endif
+let &undodir = s:undodir
+unlet s:undodir
+
 " Auto indent
 set autoindent
 
@@ -175,6 +184,8 @@ Plug 'mhinz/vim-signify'
 " NerdTree
 Plug 'scrooloose/nerdtree'
 let g:NERDTreeQuitOnOpen = 1
+let g:NERDTreeShowHidden = 1
+let g:NERDTreeRespectWildIgnore = 1
 
 " Tag list
 Plug 'vim-scripts/taglist.vim'
